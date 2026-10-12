@@ -1,65 +1,44 @@
-<div align="center">
-  <p>
-    <img src="https://github.com/romanvht/ByeDPIAndroid/raw/master/.github/images/app.svg" alt="Логотип ByeDPI" width="200" />
-  </p>
-  <h1>ByeByeDPI Android</h1>
-  <p>
-    Русский |
-    <a href="README-en.md">English</a> |
-    <a href="README-tr.md">Türkçe</a>
-  </p>
-  <p>
-    <a href="https://github.com/romanvht/ByeByeDPI/releases/latest"><img src="https://img.shields.io/github/v/release/romanvht/ByeByeDPI" alt="Latest Release" /></a>
-    <a href="https://github.com/romanvht/ByeByeDPI/releases"><img src="https://img.shields.io/github/downloads/romanvht/ByeByeDPI/total" alt="Downloads" /></a>
-    <a href="https://github.com/romanvht/ByeByeDPI/blob/master/LICENSE"><img src="https://img.shields.io/github/license/romanvht/ByeByeDPI" alt="License" /></a>
-    <a href="https://github.com/romanvht/ByeByeDPI"><img src="https://img.shields.io/github/languages/code-size/romanvht/ByeByeDPI" alt="GitHub code size in bytes"/></a>
-  </p>
-</div>
+# ⚡ AzeDPI
 
-Приложение для Android, которое локально запускает ByeDPI и перенаправляет весь трафик через него.
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-Active-brightgreen?style=for-the-badge" alt="Status">
+  <img src="https://img.shields.io/badge/Platform-Android%20%7C%20Linux-blue?style=for-the-badge" alt="Platforms">
+  <img src="https://img.shields.io/badge/Fork-ByeByeDPI-orange?style=for-the-badge" alt="Fork">
+  <img src="https://img.shields.io/badge/License-GPL--3.0-purple?style=for-the-badge" alt="License">
+</p>
 
-Для стабильной работы может потребоваться изменить настройки. Подробнее о различных настройках можно прочитать в [документации ByeDPI](https://github.com/hufrea/byedpi/blob/main/README.md).
-
-Приложение не является VPN. Оно использует VPN-режим на Android для перенаправления трафика, но не передает ничего на удаленный сервер. Оно не шифрует трафик и не скрывает ваш IP-адрес.
-
-У приложения есть единственный официальный сайт -> https://byebyedpi.xyz
+<p align="center">
+  <b>AzeDPI</b> — модифицированный форк <b>ByeByeDPI</b>, заточенный под агрессивный обход DPI, манипуляцию пакетами и стабильный доступ к Discord, YouTube и заблокированным соцсетям прямо на мобильных устройствах и Linux без использования внешних VPN-серверов.
+</p>
 
 ---
 
-### Возможности
-* Автозапуск сервиса при старте устройства
-* Сохранение списков параметров командной строки
-* Улучшена совместимость с Android TV/BOX
-* Раздельное туннелирование приложений
-* Импорт/экспорт настроек
+## 🚀 Почему именно AzeDPI?
 
-### Использование
-* Для работы автозапуска активируйте пункт в настройках.
-* Рекомендуется подключится один раз к VPN, чтобы принять запрос.
-* После этого, при загрузке устройства, приложение автоматически запустит сервис в зависимости от настроек (VPN/Proxy)
-* Комплексная инструкция от комьюнити [ByeByeDPI-Manual](https://byebyedpi.xyz)
+В отличие от классического ByeByeDPI, здесь упор сделан на борьбу с современными методами фильтрации (ТСПУ) и оптимизацию под стриминг и войс:
 
-### Сборка
-1. Клонируйте репозиторий с сабмодулями:
-```bash
-git clone --recurse-submodules
-```
-2. Запустите скрипт сборки из корня репозитория:
-```bash
-./gradlew assembleRelease
-```
-3. APK будет в `app/build/outputs/apk/release/`
+* **Продвинутая фрагментация:** Гибкий сплит ClientHello (SNI/TLS) по кастомным смещениям, сбивающий эвристику большинства DPI-систем.
+* **Fake Packets & Desync:** Инъекция мусорных пакетов с низким TTL для десинхронизации анализатора сессий.
+* **Discord & Voice Fix:** Оптимизация обработки UDP-трафика и STUN-запросов для нормальной работы голосовых каналов и звонков.
+* **YouTube 4K без буферизации:** Точечная модификация заголовков и сплитинг пулов Googlevideo.
+* **Нативная скорость:** Трафик не шифруется и не перенаправляется на сторонние прокси — пинг не страдает, оверхед минимален.
 
-> P.S.: hev_socks5_tunnel не соберется под Windows, вам нужно будет использовать WSL
+---
 
-### Хеш подписи
-SHA-256:
-`77:45:10:75:AC:EA:40:64:06:47:5D:74:D4:59:88:3A:49:A6:40:51:FA:F3:2E:42:F7:18:F3:F9:77:7A:8D:FB`
+## 🛠 Ключевые возможности
 
-### Зависимости
-- [ByeDPI](https://github.com/hufrea/byedpi)
-- [hev-socks5-tunnel](https://github.com/heiher/hev-socks5-tunnel)
+- [x] **SNI Tripping / Fragmentation:** Разбивка доменного имени в TCP-сегментах на лету.
+- [x] **Fake SNI / Header Mangling:** Подмена и деформация параметров запроса.
+- [x] **Low-TTL Dummy Packets:** Защита от систем глубокого анализа с помощью пакетов-ловушек.
+- [x] **Работа через VpnService (Android):** Полная изоляция и перехват без необходимости рут-прав.
+- [x] **CLI-режим для Termux / Linux:** Поддержка работы через `iptables` / `NFQUEUE`.
 
-### Благодарность
-- [hufrea](https://github.com/hufrea) - за [ByeDPI](https://github.com/hufrea/byedpi)
-- [dovecoteescapee](https://github.com/dovecoteescapee) - за изначальную реализацию [ByeDPIAndroid](https://github.com/dovecoteescapee/ByeDPIAndroid)
+---
+
+## 📦 Сборка и установка
+
+### Android (APK)
+
+1. Перейди во вкладку [Releases](../../releases) и скачай свежий `AzeDPI.apk`.
+2. Установи на устройство, выбери пресет настроек или введи кастомные флаги.
+3. Нажми **Connect** и подтверди создание локального VPN-подключения
