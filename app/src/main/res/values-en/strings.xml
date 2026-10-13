@@ -252,4 +252,7 @@
     <string name="traffic_log_entry">%1$s  ↑ %2$d pkts / %3$s    ↓ %4$d pkts / %5$s</string>
     <string name="traffic_log_started">Intervals from the last minute:</string>
     <string name="traffic_log_unavailable">Traffic counters are unavailable on this device.</string>
+    <string name="donate_bank_title">Kapital Bank</string>
+    <string name="donate_bank_placeholder">Card number (temporary placeholder, do not use for transfers)</string>
+    <string name="donate_card_number">0000 0000 0000 0000</string>
 </resources>

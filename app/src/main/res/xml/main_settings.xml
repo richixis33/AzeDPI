@@ -182,11 +182,7 @@
         <Preference
             android:key="source_code"
             android:title="@string/source_code_link"
-            android:icon="@drawable/ic_github">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:data="https://github.com/romanvht/ByeDPIAndroid" />
-        </Preference>
+            android:icon="@drawable/ic_github" />
 
         <Preference
             android:key="documentation"

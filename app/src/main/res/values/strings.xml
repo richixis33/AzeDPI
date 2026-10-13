@@ -255,4 +255,7 @@
     <string name="traffic_log_entry">%1$s  ↑ %2$d пак. / %3$s    ↓ %4$d пак. / %5$s</string>
     <string name="traffic_log_started">Интервалы за последнюю минуту:</string>
     <string name="traffic_log_unavailable">Счётчики трафика недоступны на этом устройстве.</string>
+    <string name="donate_bank_title">Kapital Bank</string>
+    <string name="donate_bank_placeholder">Номер карты (временная заглушка, не используйте для перевода)</string>
+    <string name="donate_card_number">0000 0000 0000 0000</string>
 </resources>

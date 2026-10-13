@@ -244,4 +244,7 @@
     <string name="traffic_log_entry">%1$s  ↑ %2$d pak. / %3$s    ↓ %4$d pak. / %5$s</string>
     <string name="traffic_log_started">Son dəqiqənin intervalları:</string>
     <string name="traffic_log_unavailable">Bu cihazda trafik sayğacları mövcud deyil.</string>
+    <string name="donate_bank_title">Kapital Bank</string>
+    <string name="donate_bank_placeholder">Kart nömrəsi (müvəqqəti nümunədir, köçürmə üçün istifadə etməyin)</string>
+    <string name="donate_card_number">0000 0000 0000 0000</string>
 </resources>

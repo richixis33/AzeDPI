@@ -7,6 +7,7 @@ import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.edit
 import androidx.preference.*
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.github.romanvht.byedpi.R
 import io.github.romanvht.byedpi.BuildConfig
 import io.github.romanvht.byedpi.activities.TestActivity
@@ -66,6 +67,12 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
         findPreferenceNotNull<Preference>("donate")
             .setOnPreferenceClickListener {
                 showDonateDialog()
+                true
+            }
+
+        findPreferenceNotNull<Preference>("source_code")
+            .setOnPreferenceClickListener {
+                openUrl("https://github.com/richixis33/AzeDPI")
                 true
             }
 
@@ -218,26 +225,38 @@ class MainSettingsFragment : PreferenceFragmentCompat() {
 
     private fun showDonateDialog() {
         val context = requireContext()
-
-        val items = arrayOf(
-            getString(R.string.donate_message),
-            getString(R.string.donate_cloudtips),
-            getString(R.string.donate_boosty),
-            getString(R.string.donate_telegram_bot),
-            getString(R.string.donate_thanks),
-        )
-
-        AlertDialog.Builder(context)
-            .setTitle(getString(R.string.donate))
-            .setItems(items) { _, which ->
-                when (which) {
-                    1 -> openUrl("https://pay.cloudtips.ru/p/92c754db")
-                    2 -> openUrl("https://boosty.to/romanvht/donate")
-                    3 -> openUrl("https://t.me/romanvht_donate_bot")
-                }
-            }
+        val dialogView = layoutInflater.inflate(R.layout.dialog_donate, null)
+        val dialog = MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.donate)
+            .setView(dialogView)
             .setNegativeButton(android.R.string.cancel, null)
-            .show()
+            .create()
+
+        dialogView.findViewById<android.view.View>(R.id.donate_card_number)
+            .setOnClickListener {
+                ClipboardUtils.copy(
+                    context,
+                    getString(R.string.donate_card_number),
+                    getString(R.string.donate_bank_title),
+                )
+            }
+        dialogView.findViewById<android.view.View>(R.id.donate_cloudtips_button)
+            .setOnClickListener {
+                dialog.dismiss()
+                openUrl("https://pay.cloudtips.ru/p/92c754db")
+            }
+        dialogView.findViewById<android.view.View>(R.id.donate_boosty_button)
+            .setOnClickListener {
+                dialog.dismiss()
+                openUrl("https://boosty.to/romanvht/donate")
+            }
+        dialogView.findViewById<android.view.View>(R.id.donate_telegram_button)
+            .setOnClickListener {
+                dialog.dismiss()
+                openUrl("https://t.me/romanvht_donate_bot")
+            }
+
+        dialog.show()
     }
 
     private fun openUrl(url: String) {
