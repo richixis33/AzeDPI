@@ -4,9 +4,7 @@
         <item name="system">Otomatik</item>
         <item name="ru">Русский</item>
         <item name="en">English</item>
-        <item name="tr">Türkçe</item>
-        <item name="kk">Қазақша</item>
-        <item name="vi">Tiếng Việt</item>
+        <item name="az">Azərbaycanca</item>
     </array>
 
     <array name="themes">

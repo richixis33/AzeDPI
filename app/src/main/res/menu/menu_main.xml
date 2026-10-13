@@ -17,8 +17,14 @@
         app:showAsAction="never" />
 
     <item
-        android:id="@+id/action_close_app"
+        android:id="@+id/action_traffic_log"
         android:orderInCategory="3"
+        android:title="@string/traffic_log_title"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_close_app"
+        android:orderInCategory="4"
         android:title="@string/close_app"
         app:showAsAction="never" />
 

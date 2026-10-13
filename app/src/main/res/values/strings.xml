@@ -245,4 +245,14 @@
     <string name="file_picker_unavailable">На устройстве отсутствует системный выбор файлов. Для продолжения предоставьте право доступа к хранилищу.</string>
     <string name="grant_access">Предоставить доступ</string>
     <string name="storage_access_not_granted">Доступ к файлам не предоставлен</string>
+    <string name="welcome_title">AzeDPI</string>
+    <string name="welcome_message">Это приложение сделано Ричиксом с любовью ❤️</string>
+    <string name="welcome_image_description">Стикер «Вась»</string>
+    <string name="welcome_close">Закрыть</string>
+    <string name="traffic_log_title">Сетевой трафик</string>
+    <string name="traffic_log_description">Системные счётчики пакетов AzeDPI и интервалы за последнюю минуту. Содержимое пакетов не записывается.</string>
+    <string name="traffic_log_summary">Всего:\n↑ Отправлено: %1$s · %2$d пакетов\n↓ Получено: %3$s · %4$d пакетов</string>
+    <string name="traffic_log_entry">%1$s  ↑ %2$d пак. / %3$s    ↓ %4$d пак. / %5$s</string>
+    <string name="traffic_log_started">Интервалы за последнюю минуту:</string>
+    <string name="traffic_log_unavailable">Счётчики трафика недоступны на этом устройстве.</string>
 </resources>

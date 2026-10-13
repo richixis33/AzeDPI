@@ -28,9 +28,9 @@
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/status_button_card"
-            android:layout_width="120dp"
-            android:layout_height="120dp"
-            app:cardCornerRadius="60dp"
+            android:layout_width="104dp"
+            android:layout_height="104dp"
+            app:cardCornerRadius="52dp"
             app:cardElevation="8dp"
             app:strokeWidth="0dp"
             android:clickable="true"
@@ -39,8 +39,8 @@
 
             <ImageView
                 android:id="@+id/status_button_icon"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_power"
                 android:contentDescription="@string/vpn_connect"
@@ -141,9 +141,9 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/editor_button"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="6dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
@@ -153,14 +153,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:gravity="center"
-                    android:padding="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="6dp"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_tune"
                         android:contentDescription="@string/open_editor"
                         app:tint="?attr/colorPrimary" />
@@ -168,7 +171,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp"
                         android:text="@string/open_editor"
                         android:textSize="14sp"
                         android:textColor="?android:textColorPrimary" />
@@ -178,8 +181,8 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/settings_button"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
@@ -189,14 +192,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:gravity="center"
-                    android:padding="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="6dp"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/baseline_settings_24"
                         android:contentDescription="@string/title_settings"
                         app:tint="?attr/colorPrimary" />
@@ -204,7 +210,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp"
                         android:text="@string/title_settings"
                         android:textSize="14sp"
                         android:textColor="?android:textColorPrimary" />
@@ -225,9 +231,9 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/test_proxy_button"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="6dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
@@ -237,14 +243,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:gravity="center"
-                    android:padding="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="6dp"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_speed"
                         android:contentDescription="@string/main_btn_test"
                         app:tint="?attr/colorPrimary" />
@@ -252,7 +261,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp"
                         android:text="@string/main_btn_test"
                         android:textSize="14sp"
                         android:textColor="?android:textColorPrimary" />
@@ -262,8 +271,8 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/domain_lists_button"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
+                android:layout_width="160dp"
+                android:layout_height="48dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:foreground="?attr/selectableItemBackground"
@@ -273,14 +282,17 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical"
+                    android:orientation="horizontal"
                     android:gravity="center"
-                    android:padding="16dp"
+                    android:paddingStart="12dp"
+                    android:paddingTop="6dp"
+                    android:paddingEnd="12dp"
+                    android:paddingBottom="6dp"
                     tools:ignore="UseCompoundDrawables">
 
                     <ImageView
-                        android:layout_width="32dp"
-                        android:layout_height="32dp"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
                         android:src="@drawable/ic_filter_list"
                         android:contentDescription="@string/main_btn_list"
                         app:tint="?attr/colorPrimary" />
@@ -288,7 +300,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="8dp"
                         android:text="@string/main_btn_list"
                         android:textSize="14sp"
                         android:textColor="?android:textColorPrimary" />

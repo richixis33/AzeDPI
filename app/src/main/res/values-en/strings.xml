@@ -242,4 +242,14 @@
     <string name="file_picker_unavailable">The device has no system file picker. Grant the app file access to continue.</string>
     <string name="grant_access">Grant access</string>
     <string name="storage_access_not_granted">File access was not granted</string>
+    <string name="welcome_title">AzeDPI</string>
+    <string name="welcome_message">This app was made by Richix with love ❤️</string>
+    <string name="welcome_image_description">Vas sticker</string>
+    <string name="welcome_close">Close</string>
+    <string name="traffic_log_title">Network traffic</string>
+    <string name="traffic_log_description">AzeDPI system packet counters and intervals for the last minute. Packet contents are not recorded.</string>
+    <string name="traffic_log_summary">Total:\n↑ Sent: %1$s · %2$d packets\n↓ Received: %3$s · %4$d packets</string>
+    <string name="traffic_log_entry">%1$s  ↑ %2$d pkts / %3$s    ↓ %4$d pkts / %5$s</string>
+    <string name="traffic_log_started">Intervals from the last minute:</string>
+    <string name="traffic_log_unavailable">Traffic counters are unavailable on this device.</string>
 </resources>

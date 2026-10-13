@@ -46,6 +46,7 @@ object SettingsUtils {
         "system" -> LocaleListCompat.getEmptyLocaleList()
         "ru" -> LocaleListCompat.forLanguageTags("ru")
         "en" -> LocaleListCompat.forLanguageTags("en")
+        "az" -> LocaleListCompat.forLanguageTags("az")
         "tr" -> LocaleListCompat.forLanguageTags("tr")
         "kk" -> LocaleListCompat.forLanguageTags("kk")
         "vi" -> LocaleListCompat.forLanguageTags("vi")

@@ -5,9 +5,13 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
+import android.net.TrafficStats
 import android.net.VpnService
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.text.format.Formatter
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -24,6 +28,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.core.content.edit
 import androidx.lifecycle.lifecycleScope
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import io.github.romanvht.byedpi.R
 import io.github.romanvht.byedpi.data.*
 import io.github.romanvht.byedpi.databinding.ActivityMainBinding
@@ -39,6 +44,18 @@ import kotlin.system.exitProcess
 class MainActivity : BaseActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var historyUtils: HistoryUtils
+    private val trafficHandler = Handler(Looper.getMainLooper())
+
+    private data class TrafficCounters(
+        val receivedPackets: Long,
+        val receivedBytes: Long,
+        val sentPackets: Long,
+        val sentBytes: Long,
+    ) {
+        val isAvailable: Boolean
+            get() = receivedPackets >= 0 && receivedBytes >= 0 &&
+                sentPackets >= 0 && sentBytes >= 0
+    }
 
     companion object {
         private val TAG: String = MainActivity::class.java.simpleName
@@ -242,6 +259,7 @@ class MainActivity : BaseActivity() {
         }
 
         ShortcutUtils.update(this)
+        binding.root.post { showWelcomeIfNeeded() }
     }
 
     override fun onResume() {
@@ -252,6 +270,7 @@ class MainActivity : BaseActivity() {
     }
 
     override fun onDestroy() {
+        trafficHandler.removeCallbacksAndMessages(null)
         super.onDestroy()
         unregisterReceiver(receiver)
     }
@@ -285,6 +304,11 @@ class MainActivity : BaseActivity() {
                 intent.putExtra(FileActivity.EXTRA_MODE, FileActivity.MODE_CREATE)
                 intent.putExtra(FileActivity.EXTRA_TYPE, FileActivity.TYPE_LOGS)
                 logsRegister.launch(intent)
+                true
+            }
+
+            R.id.action_traffic_log -> {
+                showTrafficLog()
                 true
             }
 
@@ -342,6 +366,108 @@ class MainActivity : BaseActivity() {
         }
         dialog.show()
     }
+
+    private fun showWelcomeIfNeeded() {
+        val preferences = getPreferences()
+        if (preferences.getBoolean("welcome_shown", false) || isFinishing || isDestroyed) return
+
+        val dialogView = layoutInflater.inflate(R.layout.dialog_welcome, null)
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setView(dialogView)
+            .setCancelable(false)
+            .create()
+
+        dialogView.findViewById<View>(R.id.welcome_close_button).setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.setOnDismissListener {
+            preferences.edit { putBoolean("welcome_shown", true) }
+        }
+        dialog.show()
+    }
+
+    private fun showTrafficLog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_traffic_log, null)
+        val summaryView = dialogView.findViewById<TextView>(R.id.traffic_summary)
+        val logView = dialogView.findViewById<TextView>(R.id.traffic_log_entries)
+        val logScroll = dialogView.findViewById<ScrollView>(R.id.traffic_log_scroll)
+        val entries = mutableListOf<String>()
+        var previous: TrafficCounters? = null
+        logView.setText(R.string.traffic_log_started)
+
+        fun updateTraffic() {
+            val current = readTrafficCounters()
+            if (!current.isAvailable) {
+                summaryView.setText(R.string.traffic_log_unavailable)
+                return
+            }
+
+            summaryView.text = getString(
+                R.string.traffic_log_summary,
+                Formatter.formatShortFileSize(this, current.sentBytes),
+                current.sentPackets,
+                Formatter.formatShortFileSize(this, current.receivedBytes),
+                current.receivedPackets,
+            )
+
+            previous?.let { last ->
+                val timestamp = android.text.format.DateFormat.format("HH:mm:ss", System.currentTimeMillis())
+                entries.add(getString(
+                    R.string.traffic_log_entry,
+                    timestamp,
+                    counterDelta(current.sentPackets, last.sentPackets),
+                    Formatter.formatShortFileSize(this, counterDelta(current.sentBytes, last.sentBytes)),
+                    counterDelta(current.receivedPackets, last.receivedPackets),
+                    Formatter.formatShortFileSize(this, counterDelta(current.receivedBytes, last.receivedBytes)),
+                ))
+                if (entries.size > 60) entries.removeAt(0)
+                logView.text = buildString {
+                    appendLine(getString(R.string.traffic_log_started))
+                    entries.forEach(::appendLine)
+                }
+                logScroll.post { logScroll.fullScroll(View.FOCUS_DOWN) }
+            }
+            previous = current
+        }
+
+        val dialog = MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.traffic_log_title)
+            .setView(dialogView)
+            .setPositiveButton(R.string.diagnostic_copy, null)
+            .setNegativeButton(android.R.string.cancel, null)
+            .create()
+
+        val update = object : Runnable {
+            override fun run() {
+                if (!dialog.isShowing) return
+                updateTraffic()
+                trafficHandler.postDelayed(this, 1_000)
+            }
+        }
+
+        dialog.setOnShowListener {
+            dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
+                val report = "${summaryView.text}\n\n${logView.text}"
+                ClipboardUtils.copy(this, report, getString(R.string.traffic_log_title))
+            }
+            updateTraffic()
+            trafficHandler.postDelayed(update, 1_000)
+        }
+        dialog.setOnDismissListener {
+            trafficHandler.removeCallbacks(update)
+        }
+        dialog.show()
+    }
+
+    private fun readTrafficCounters() = TrafficCounters(
+        receivedPackets = TrafficStats.getUidRxPackets(android.os.Process.myUid()),
+        receivedBytes = TrafficStats.getUidRxBytes(android.os.Process.myUid()),
+        sentPackets = TrafficStats.getUidTxPackets(android.os.Process.myUid()),
+        sentBytes = TrafficStats.getUidTxBytes(android.os.Process.myUid()),
+    )
+
+    private fun counterDelta(current: Long, previous: Long) =
+        if (current >= previous) current - previous else current
 
     private fun start() {
         if (TestService.isRunning) {

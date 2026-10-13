@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="languages">
+        <item name="system">Sistem</item>
+        <item name="ru">Русский</item>
+        <item name="en">English</item>
+        <item name="az">Azərbaycan dili</item>
+    </array>
+
+    <array name="themes">
+        <item name="system">Sistem</item>
+        <item name="light">Açıq</item>
+        <item name="dark">Qaranlıq</item>
+    </array>
+
+    <array name="byedpi_modes">
+        <item name="vpn">VPN</item>
+        <item name="proxy">Proksi</item>
+    </array>
+
+    <array name="byedpi_desync_methods">
+        <item name="none">Yoxdur</item>
+        <item name="split">Böl</item>
+        <item name="disorder">Qarışdır</item>
+        <item name="fake">Saxta</item>
+        <item name="oob">Kənar məlumat</item>
+        <item name="oob">Qarışıq kənar məlumat</item>
+    </array>
+
+    <array name="byedpi_hosts_modes">
+        <item name="disable">Deaktiv</item>
+        <item name="blacklist">Qara siyahı</item>
+        <item name="whitelist">Ağ siyahı</item>
+    </array>
+
+    <array name="applist_types">
+        <item name="disable">Deaktiv</item>
+        <item name="blacklist">Qara siyahı</item>
+        <item name="whitelist">Ağ siyahı</item>
+    </array>
+</resources>
